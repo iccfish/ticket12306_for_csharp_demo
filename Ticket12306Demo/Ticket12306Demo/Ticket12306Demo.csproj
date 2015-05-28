@@ -60,6 +60,17 @@
     <Compile Include="Network\NetClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\DynamicDataService.cs" />
+    <Compile Include="Service\Entities\LoginInfo.cs" />
+    <Compile Include="Service\OrderQueueService.cs" />
+    <Compile Include="Service\PassengerService.cs" />
+    <Compile Include="Service\Session.cs" />
+    <Compile Include="Service\ServiceBase.cs" />
+    <Compile Include="Service\ServiceContext.cs" />
+    <Compile Include="Service\OrderSubmitService.cs" />
+    <Compile Include="Service\StationDataService.cs" />
+    <Compile Include="Service\TicketQueryService.cs" />
+    <Compile Include="Service\VerifyCodeService.cs" />
     <Compile Include="UI\Dialogs\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,10 +100,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entity\" />
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
