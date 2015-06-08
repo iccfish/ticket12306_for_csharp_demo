@@ -54,7 +54,7 @@ namespace Ticket12306Demo.Service
 
 			//创建网络请求并发送。注意地址中最后的随机数，并没有发送。
 			//对于静态文件来说，这个查询字符串是无效的
-			//一般用来区分版本号，以便于更新的时候拿到过期的数据。
+			//一般用来区分版本号，以便于在更新资源的时候的时候防止客户端拿到过期的数据。
 			var stCtx = ServiceContext.Session.NetClient
 				.Create<string>(HttpMethod.Get, "https://kyfw.12306.cn/otn/resources/js/framework/station_name.js")
 				.SendTask();

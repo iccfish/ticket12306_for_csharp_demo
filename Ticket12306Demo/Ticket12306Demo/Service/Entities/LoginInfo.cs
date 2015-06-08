@@ -11,6 +11,12 @@ namespace Ticket12306Demo.Service.Entities
 	/// </summary>
 	class LoginInfo
 	{
+
+		/// <summary>
+		/// 获得或设置当前的显示名
+		/// </summary>
+		public string DisplayName { get; set; }
+
 		/// <summary>
 		/// 登录用户名
 		/// </summary>

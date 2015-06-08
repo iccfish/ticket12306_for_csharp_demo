@@ -24,11 +24,24 @@ namespace Ticket12306Demo.UI.Dialogs
 		private async void MainForm_Load(object sender, EventArgs e)
 		{
 			await InitServiceContext();
+			InitToolbar();
 			InitStatusBar();
 			InitQueryParamEdit();
 		}
 
 		#region 状态栏和工具栏事件
+
+		void InitToolbar()
+		{
+			tsExit.Click += (s, e) => Close();
+			tsLogin.Enabled = !(tsLogout.Enabled = _context.Session.IsLogined);
+			//捕捉登录状态变化事件，在登录状态发生变化的时候重设登录状态
+			_context.Session.IsLoginedChanged += (s, e) =>
+			{
+				tsLogin.Enabled = !(tsLogout.Enabled = _context.Session.IsLogined);
+				tsLogin.Text = _context.Session.IsLogined ? string.Format("已登录为【{0} ({1})】", _context.Session.LoginInfo.DisplayName, _context.Session.LoginInfo.UserName) : "登录(&I)";
+			};
+		}
 
 		/// <summary>
 		/// 初始化状态栏
@@ -63,7 +76,7 @@ namespace Ticket12306Demo.UI.Dialogs
 			stStatus.Text = opName.DefaultForEmpty("正在操作，请稍等...");
 			stProgress.Visible = true;
 			stProgress.Maximum = maxItemsCount > 0 ? maxItemsCount : 100;
-			stProgress.Style = maxItemsCount > 0 ? ProgressBarStyle.Blocks : ProgressBarStyle.Continuous;
+			stProgress.Style = maxItemsCount > 0 ? ProgressBarStyle.Blocks : ProgressBarStyle.Marquee;
 			if (disableForm)
 			{
 				btnQueryTicket.Enabled = false;
