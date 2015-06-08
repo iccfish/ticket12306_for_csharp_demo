@@ -63,8 +63,10 @@
     <Compile Include="Network\NetClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\DataService.cs" />
     <Compile Include="Service\DynamicDataService.cs" />
     <Compile Include="Service\Entities\LoginInfo.cs" />
+    <Compile Include="Service\Entities\Station.cs" />
     <Compile Include="Service\OrderQueueService.cs" />
     <Compile Include="Service\PassengerService.cs" />
     <Compile Include="Service\Session.cs" />

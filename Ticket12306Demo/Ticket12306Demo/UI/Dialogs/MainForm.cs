@@ -21,9 +21,9 @@ namespace Ticket12306Demo.UI.Dialogs
 			Load += MainForm_Load;
 		}
 
-		private void MainForm_Load(object sender, EventArgs e)
+		private async void MainForm_Load(object sender, EventArgs e)
 		{
-			InitServiceContext();
+			await InitServiceContext();
 			InitStatusBar();
 			InitQueryParamEdit();
 		}
@@ -36,7 +36,7 @@ namespace Ticket12306Demo.UI.Dialogs
 		void InitStatusBar()
 		{
 			//绑定链接处理
-			foreach (var label in st.Items.Cast<ToolStripStatusLabel>().Where(s => s.IsLink && s.Tag != null))
+			foreach (var label in st.Items.OfType<ToolStripStatusLabel>().Where(s => s.IsLink && s.Tag != null))
 			{
 				label.Click += (s, e) =>
 				{
@@ -65,7 +65,9 @@ namespace Ticket12306Demo.UI.Dialogs
 			stProgress.Maximum = maxItemsCount > 0 ? maxItemsCount : 100;
 			stProgress.Style = maxItemsCount > 0 ? ProgressBarStyle.Blocks : ProgressBarStyle.Continuous;
 			if (disableForm)
-				Enabled = false;
+			{
+				btnQueryTicket.Enabled = false;
+			}
 		}
 
 		/// <summary>
@@ -75,7 +77,7 @@ namespace Ticket12306Demo.UI.Dialogs
 		{
 			stStatus.Text = "就绪.";
 			stProgress.Visible = false;
-			Enabled = true;
+			btnQueryTicket.Enabled = true;
 		}
 
 		#endregion
@@ -93,6 +95,9 @@ namespace Ticket12306Demo.UI.Dialogs
 			dtDate.MaxDate = DateTime.Now.Date.AddDays(_context.DataService.MaxSellDays);
 			dtDate.Value = DateTime.Now.AddDays(_context.DataService.DefaultDayOffset);
 
+			var allstationText = _context.StationDataService.AllStations.Select(s => (object)(s.FirstLetter.PadRight(8, ' ') + s.Name)).ToArray();
+			cbFrom.Items.AddRange(allstationText);
+			cbTo.Items.AddRange(allstationText);
 		}
 
 		#endregion
@@ -104,9 +109,12 @@ namespace Ticket12306Demo.UI.Dialogs
 		/// <summary>
 		/// 初始化服务状态
 		/// </summary>
-		void InitServiceContext()
+		async Task InitServiceContext()
 		{
 			_context = new ServiceContext();
+			BeginOperation("正在初始化站点数据...", 0, true);
+			await _context.StationDataService.LoadStationDatasAsync();
+			EndOperation();
 		}
 
 		#endregion
