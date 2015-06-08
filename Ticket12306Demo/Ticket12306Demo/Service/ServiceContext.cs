@@ -21,6 +21,7 @@ namespace Ticket12306Demo.Service
 			StationDataService = new StationDataService(this);
 			VerifyCodeService = new VerifyCodeService(this);
 			TicketQueryService = new TicketQueryService(this);
+			DataService = new DataService(this);
 		}
 
 		/// <summary>
@@ -63,5 +64,10 @@ namespace Ticket12306Demo.Service
 		/// 获得当前的查票服务
 		/// </summary>
 		public TicketQueryService TicketQueryService { get; private set; }
+
+		/// <summary>
+		/// 数据服务
+		/// </summary>
+		public DataService DataService { get; private set; }
 	}
 }
