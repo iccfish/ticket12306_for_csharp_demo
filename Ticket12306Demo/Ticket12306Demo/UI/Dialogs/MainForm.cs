@@ -11,13 +11,16 @@ using System.Windows.Forms;
 namespace Ticket12306Demo.UI.Dialogs
 {
 	using System.Diagnostics;
+	using System.Text.RegularExpressions;
 	using Ticket12306Demo.Service;
+	using Ticket12306Demo.Service.Entities;
 
 	public partial class MainForm : Form
 	{
 		public MainForm()
 		{
 			InitializeComponent();
+			dgvTickets.AutoGenerateColumns = false;
 			Load += MainForm_Load;
 		}
 
@@ -41,6 +44,7 @@ namespace Ticket12306Demo.UI.Dialogs
 				tsLogin.Enabled = !(tsLogout.Enabled = _context.Session.IsLogined);
 				tsLogin.Text = _context.Session.IsLogined ? string.Format("已登录为【{0} ({1})】", _context.Session.LoginInfo.DisplayName, _context.Session.LoginInfo.UserName) : "登录(&I)";
 			};
+			btnQueryTicket.Click += (s, e) => QueryTicket();
 		}
 
 		/// <summary>
@@ -106,9 +110,9 @@ namespace Ticket12306Demo.UI.Dialogs
 			//dtDate.MaxDate = DateTime.Now.Date.AddDays(59);
 			//dtDate.Value = DateTime.Now.AddDays(1);
 			dtDate.MaxDate = DateTime.Now.Date.AddDays(_context.DataService.MaxSellDays);
-			dtDate.Value = DateTime.Now.AddDays(_context.DataService.DefaultDayOffset);
+			dtDate.Value = DateTime.Now.Date.AddDays(_context.DataService.DefaultDayOffset);
 
-			var allstationText = _context.StationDataService.AllStations.Select(s => (object)(s.FirstLetter.PadRight(8, ' ') + s.Name)).ToArray();
+			var allstationText = _context.StationDataService.AllStations.Select(s => (object)(s.FirstLetter.PadRight(5, ' ') + s.Name + "\t" + s.Code)).ToArray();
 			cbFrom.Items.AddRange(allstationText);
 			cbTo.Items.AddRange(allstationText);
 		}
@@ -131,5 +135,80 @@ namespace Ticket12306Demo.UI.Dialogs
 		}
 
 		#endregion
+
+		#region 查票
+
+		/// <summary>
+		/// 从选择的字符串获得电报码
+		/// </summary>
+		/// <param name="str"></param>
+		/// <returns></returns>
+		bool GetTeleCode(string str, out string name, out string code)
+		{
+			name = code = null;
+
+			if (str.IsNullOrEmpty()) return false;
+
+			var args = Regex.Split(str, @"\s+");
+			if (args.Length != 3)
+				return false;
+
+			name = args[1];
+			code = args[2];
+			return true;
+		}
+
+		/// <summary>
+		/// 查票
+		/// </summary>
+		/// <returns></returns>
+		async Task QueryTicket()
+		{
+			string fromCode, fromName, toCode, toName;
+			var date = dtDate.Value;
+
+			if (!GetTeleCode(cbFrom.Text, out fromName, out fromCode) || !GetTeleCode(cbTo.Text, out toName, out toCode))
+			{
+				MessageBox.Show(this, "哎呀，没有选择车站，逗我呢 o(╯□╰)o", "哎呀", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
+			TicketQueryResult result = null;
+			Exception exception = null;
+
+			BeginOperation("正在查询...", 0);
+			btnQueryTicket.Enabled = false;
+			try
+			{
+				result = await _context.TicketQueryService.QueryTicket(date, fromName, fromCode, toName, toCode, ckStudent.Checked);
+			}
+			catch (Exception ex)
+			{
+				exception = ex;
+			}
+			finally
+			{
+				EndOperation();
+			}
+
+			if (result != null)
+			{
+				stStatus.Text = string.Format("查询到 {0} 趟车次。", result.Count);
+
+				//绑定数据
+				bs.DataSource = result;
+			}
+			else
+			{
+				stStatus.Text = "查询出错，错误信息：" + exception.Message;
+			}
+		}
+
+		#endregion
+
+		private void dgvTickets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
 	}
 }

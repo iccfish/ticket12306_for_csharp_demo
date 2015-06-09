@@ -39,7 +39,7 @@
       <HintPath>..\packages\extension.fishlee.net.1.2.2.0\lib\net45\FSLib.Extension.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FSLib.Network, Version=1.4.0.2, Culture=neutral, PublicKeyToken=8bf54bd6729f490c, processorArchitecture=MSIL">
+    <Reference Include="FSLib.Network, Version=1.5.0.0, Culture=neutral, PublicKeyToken=8bf54bd6729f490c, processorArchitecture=MSIL">
       <HintPath>..\packages\network.fishlee.net.1.4.0.2\lib\net45\FSLib.Network.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -67,6 +67,11 @@
     <Compile Include="Service\DynamicDataService.cs" />
     <Compile Include="Service\Entities\LoginInfo.cs" />
     <Compile Include="Service\Entities\Station.cs" />
+    <Compile Include="Service\Entities\TicketQueryResult.cs" />
+    <Compile Include="Service\Entities\Web\QueryTicketResultData.cs" />
+    <Compile Include="Service\Entities\Web\QueryTicketResultDataInfo.cs" />
+    <Compile Include="Service\Entities\Web\QueryTicketResultDataItem.cs" />
+    <Compile Include="Service\Entities\Web\WebResponseResult.cs" />
     <Compile Include="Service\OrderQueueService.cs" />
     <Compile Include="Service\PassengerService.cs" />
     <Compile Include="Service\Session.cs" />
@@ -96,6 +101,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Ticket12306Demo.Service.Entities.TicketQueryResult.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,6 +134,7 @@
     <None Include="Resources\globe_16.png" />
     <Content Include="ticket12306demo.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
