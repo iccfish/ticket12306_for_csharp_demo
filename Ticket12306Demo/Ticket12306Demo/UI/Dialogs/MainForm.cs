@@ -30,6 +30,7 @@ namespace Ticket12306Demo.UI.Dialogs
 			InitToolbar();
 			InitStatusBar();
 			InitQueryParamEdit();
+			InitTicketGrid();
 		}
 
 		#region 状态栏和工具栏事件
@@ -138,6 +139,52 @@ namespace Ticket12306Demo.UI.Dialogs
 
 		#region 查票
 
+
+		void InitTicketGrid()
+		{
+			dgvTickets.CellFormatting += DgvTickets_CellFormatting;
+		}
+
+		private void DgvTickets_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			if (_result == null)
+				return;
+
+
+			var index = e.ColumnIndex;
+			var data = _result[e.RowIndex];
+			if (index == 1)
+			{
+				//发站
+				if (data.IsFirstStation)
+				{
+					e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+				}
+			}
+			else if (index == 3)
+			{
+				//到站
+				if (data.IsLastStation)
+				{
+					e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+				}
+			}
+			else if (index >= 6 && index <= 16)
+			{
+				var text = e.Value.ToString();
+				if (text == "" || text == "无" || text == "--" || text == "*")
+				{
+					e.CellStyle.ForeColor = Color.Gray;
+				}
+				else if (text == "有" || char.IsDigit(text[0]))
+				{
+					e.CellStyle.ForeColor = Color.Blue;
+					e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+				}
+			}
+		}
+
+
 		/// <summary>
 		/// 从选择的字符串获得电报码
 		/// </summary>
@@ -158,6 +205,8 @@ namespace Ticket12306Demo.UI.Dialogs
 			return true;
 		}
 
+		TicketQueryResult _result;
+
 		/// <summary>
 		/// 查票
 		/// </summary>
@@ -173,14 +222,14 @@ namespace Ticket12306Demo.UI.Dialogs
 				return;
 			}
 
-			TicketQueryResult result = null;
+			_result = null;
 			Exception exception = null;
 
 			BeginOperation("正在查询...", 0);
 			btnQueryTicket.Enabled = false;
 			try
 			{
-				result = await _context.TicketQueryService.QueryTicket(date, fromName, fromCode, toName, toCode, ckStudent.Checked);
+				_result = await _context.TicketQueryService.QueryTicket(date, fromName, fromCode, toName, toCode, ckStudent.Checked);
 			}
 			catch (Exception ex)
 			{
@@ -191,15 +240,16 @@ namespace Ticket12306Demo.UI.Dialogs
 				EndOperation();
 			}
 
-			if (result != null)
+			if (_result != null)
 			{
-				stStatus.Text = string.Format("查询到 {0} 趟车次。", result.Count);
+				stStatus.Text = string.Format("查询到 {0} 趟车次。", _result.Count);
 
 				//绑定数据
-				bs.DataSource = result;
+				bs.DataSource = _result;
 			}
 			else
 			{
+				bs.DataSource = null;
 				stStatus.Text = "查询出错，错误信息：" + exception.Message;
 			}
 		}

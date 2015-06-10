@@ -40,7 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FSLib.Network, Version=1.5.0.0, Culture=neutral, PublicKeyToken=8bf54bd6729f490c, processorArchitecture=MSIL">
-      <HintPath>..\packages\network.fishlee.net.1.4.0.2\lib\net45\FSLib.Network.dll</HintPath>
+      <HintPath>..\packages\network.fishlee.net.1.5.0.0\lib\net45\FSLib.Network.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

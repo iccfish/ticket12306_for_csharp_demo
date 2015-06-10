@@ -41,6 +41,9 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.ts = new System.Windows.Forms.ToolStrip();
 			this.tsLogin = new System.Windows.Forms.ToolStripButton();
@@ -64,7 +67,6 @@
 			this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.dgvTickets = new System.Windows.Forms.DataGridView();
-			this.bs = new System.Windows.Forms.BindingSource(this.components);
 			this.colTrainCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colFromStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colFromTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,6 +85,7 @@
 			this.colSeat0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colSeatOther = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colBook = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.bs = new System.Windows.Forms.BindingSource(this.components);
 			this.ts.SuspendLayout();
 			this.panelQueryParam.SuspendLayout();
 			this.st.SuspendLayout();
@@ -302,6 +305,8 @@
 			this.dgvTickets.AllowUserToDeleteRows = false;
 			this.dgvTickets.AllowUserToOrderColumns = true;
 			this.dgvTickets.AllowUserToResizeRows = false;
+			dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+			this.dgvTickets.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvTickets.AutoGenerateColumns = false;
 			this.dgvTickets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.dgvTickets.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -334,22 +339,19 @@
 			this.dgvTickets.ReadOnly = true;
 			this.dgvTickets.RowHeadersVisible = false;
 			this.dgvTickets.RowTemplate.Height = 32;
+			this.dgvTickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvTickets.ShowCellErrors = false;
 			this.dgvTickets.ShowCellToolTips = false;
 			this.dgvTickets.Size = new System.Drawing.Size(1161, 558);
 			this.dgvTickets.TabIndex = 2;
 			this.dgvTickets.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTickets_CellContentClick);
 			// 
-			// bs
-			// 
-			this.bs.DataSource = typeof(Ticket12306Demo.Service.Entities.TicketQueryResult);
-			// 
 			// colTrainCode
 			// 
 			this.colTrainCode.DataPropertyName = "TrainCode";
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.colTrainCode.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.colTrainCode.DefaultCellStyle = dataGridViewCellStyle2;
 			this.colTrainCode.Frozen = true;
 			this.colTrainCode.HeaderText = "车次";
 			this.colTrainCode.Name = "colTrainCode";
@@ -367,6 +369,11 @@
 			// 
 			// colFromTime
 			// 
+			this.colFromTime.DataPropertyName = "LeftTime";
+			dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Green;
+			dataGridViewCellStyle3.Format = "t";
+			dataGridViewCellStyle3.NullValue = null;
+			this.colFromTime.DefaultCellStyle = dataGridViewCellStyle3;
 			this.colFromTime.Frozen = true;
 			this.colFromTime.HeaderText = "发时";
 			this.colFromTime.Name = "colFromTime";
@@ -384,6 +391,11 @@
 			// 
 			// colToTime
 			// 
+			this.colToTime.DataPropertyName = "ArriveTime";
+			dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Green;
+			dataGridViewCellStyle4.Format = "t";
+			dataGridViewCellStyle4.NullValue = null;
+			this.colToTime.DefaultCellStyle = dataGridViewCellStyle4;
 			this.colToTime.Frozen = true;
 			this.colToTime.HeaderText = "到时";
 			this.colToTime.Name = "colToTime";
@@ -402,8 +414,8 @@
 			// colSw
 			// 
 			this.colSw.DataPropertyName = "Swz_Num";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSw.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSw.DefaultCellStyle = dataGridViewCellStyle5;
 			this.colSw.HeaderText = "商务座";
 			this.colSw.Name = "colSw";
 			this.colSw.ReadOnly = true;
@@ -412,8 +424,8 @@
 			// colSeatP
 			// 
 			this.colSeatP.DataPropertyName = "Tz_Num";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeatP.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeatP.DefaultCellStyle = dataGridViewCellStyle6;
 			this.colSeatP.HeaderText = "特等座";
 			this.colSeatP.Name = "colSeatP";
 			this.colSeatP.ReadOnly = true;
@@ -422,8 +434,8 @@
 			// colSeatM
 			// 
 			this.colSeatM.DataPropertyName = "Zy_Num";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeatM.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeatM.DefaultCellStyle = dataGridViewCellStyle7;
 			this.colSeatM.HeaderText = "一等座";
 			this.colSeatM.Name = "colSeatM";
 			this.colSeatM.ReadOnly = true;
@@ -432,8 +444,8 @@
 			// colSeatO
 			// 
 			this.colSeatO.DataPropertyName = "Ze_Num";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeatO.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeatO.DefaultCellStyle = dataGridViewCellStyle8;
 			this.colSeatO.HeaderText = "二等座";
 			this.colSeatO.Name = "colSeatO";
 			this.colSeatO.ReadOnly = true;
@@ -442,8 +454,8 @@
 			// colSeat6
 			// 
 			this.colSeat6.DataPropertyName = "Gr_Num";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeat6.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeat6.DefaultCellStyle = dataGridViewCellStyle9;
 			this.colSeat6.HeaderText = "高级软卧";
 			this.colSeat6.Name = "colSeat6";
 			this.colSeat6.ReadOnly = true;
@@ -452,8 +464,8 @@
 			// colSeat4
 			// 
 			this.colSeat4.DataPropertyName = "Rw_Num";
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeat4.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeat4.DefaultCellStyle = dataGridViewCellStyle10;
 			this.colSeat4.HeaderText = "软卧";
 			this.colSeat4.Name = "colSeat4";
 			this.colSeat4.ReadOnly = true;
@@ -462,8 +474,8 @@
 			// colSeat3
 			// 
 			this.colSeat3.DataPropertyName = "Yw_Num";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeat3.DefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeat3.DefaultCellStyle = dataGridViewCellStyle11;
 			this.colSeat3.HeaderText = "硬卧";
 			this.colSeat3.Name = "colSeat3";
 			this.colSeat3.ReadOnly = true;
@@ -472,8 +484,8 @@
 			// colSeat2
 			// 
 			this.colSeat2.DataPropertyName = "Rz_Num";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeat2.DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeat2.DefaultCellStyle = dataGridViewCellStyle12;
 			this.colSeat2.HeaderText = "软座";
 			this.colSeat2.Name = "colSeat2";
 			this.colSeat2.ReadOnly = true;
@@ -482,8 +494,8 @@
 			// colSeat1
 			// 
 			this.colSeat1.DataPropertyName = "Yz_Num";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeat1.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeat1.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colSeat1.HeaderText = "硬座";
 			this.colSeat1.Name = "colSeat1";
 			this.colSeat1.ReadOnly = true;
@@ -492,8 +504,8 @@
 			// colSeat0
 			// 
 			this.colSeat0.DataPropertyName = "Wz_Num";
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeat0.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeat0.DefaultCellStyle = dataGridViewCellStyle14;
 			this.colSeat0.HeaderText = "无座";
 			this.colSeat0.Name = "colSeat0";
 			this.colSeat0.ReadOnly = true;
@@ -502,8 +514,8 @@
 			// colSeatOther
 			// 
 			this.colSeatOther.DataPropertyName = "Qt_Num";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.colSeatOther.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.colSeatOther.DefaultCellStyle = dataGridViewCellStyle15;
 			this.colSeatOther.HeaderText = "其它";
 			this.colSeatOther.Name = "colSeatOther";
 			this.colSeatOther.ReadOnly = true;
@@ -517,6 +529,10 @@
 			this.colBook.ReadOnly = true;
 			this.colBook.Text = "预定";
 			this.colBook.Width = 35;
+			// 
+			// bs
+			// 
+			this.bs.DataSource = typeof(Ticket12306Demo.Service.Entities.TicketQueryResult);
 			// 
 			// MainForm
 			// 

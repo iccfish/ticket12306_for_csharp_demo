@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Ticket12306Demo.Service.Entities
 {
-	using System.Runtime.Remoting.Channels;
 	using Ticket12306Demo.Service.Entities.Web;
 
 	/// <summary>
@@ -141,11 +140,12 @@ namespace Ticket12306Demo.Service.Entities
 		{
 			get
 			{
-				if (DaysCost > 0)
+				var hour = ((int)ElapsedTime.TotalHours) + "时" + ElapsedTime.Minutes + "分";
+                if (DaysCost > 0)
 				{
-					return ((int)ElapsedTime.TotalHours) + "小时/" + DaysCost + "天";
+					return hour + "/" + DaysCost + "天";
 				}
-				return ((int)ElapsedTime.TotalHours) + "小时";
+				return hour;
 			}
 		}
 
