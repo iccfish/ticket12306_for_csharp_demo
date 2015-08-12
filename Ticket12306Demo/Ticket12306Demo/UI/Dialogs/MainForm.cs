@@ -31,6 +31,9 @@ namespace Ticket12306Demo.UI.Dialogs
 			InitStatusBar();
 			InitQueryParamEdit();
 			InitTicketGrid();
+
+			var result = new RequireVcDlg(_context, VerifyCodeType.Login).ShowDialog();
+			MessageBox.Show(result.ToString());
 		}
 
 		#region 状态栏和工具栏事件

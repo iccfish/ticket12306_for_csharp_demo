@@ -40,7 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FSLib.Network, Version=1.5.0.0, Culture=neutral, PublicKeyToken=8bf54bd6729f490c, processorArchitecture=MSIL">
-      <HintPath>..\packages\network.fishlee.net.1.5.0.0\lib\net45\FSLib.Network.dll</HintPath>
+      <HintPath>..\packages\network.fishlee.net.1.5.1.0\lib\net45\FSLib.Network.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -71,6 +71,7 @@
     <Compile Include="Service\Entities\Web\QueryTicketResultData.cs" />
     <Compile Include="Service\Entities\Web\QueryTicketResultDataInfo.cs" />
     <Compile Include="Service\Entities\Web\QueryTicketResultDataItem.cs" />
+    <Compile Include="Service\Entities\Web\VerifyCodeCheckResult.cs" />
     <Compile Include="Service\Entities\Web\WebResponseResult.cs" />
     <Compile Include="Service\OrderQueueService.cs" />
     <Compile Include="Service\PassengerService.cs" />
@@ -81,11 +82,23 @@
     <Compile Include="Service\StationDataService.cs" />
     <Compile Include="Service\TicketQueryService.cs" />
     <Compile Include="Service\VerifyCodeService.cs" />
+    <Compile Include="UI\Dialogs\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Dialogs\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\RequireVcDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\RequireVcDlg.Designer.cs">
+      <DependentUpon>RequireVcDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\UserControlBase.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +112,9 @@
     </Compile>
     <EmbeddedResource Include="UI\Dialogs\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\RequireVcDlg.resx">
+      <DependentUpon>RequireVcDlg.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Ticket12306Demo.Service.Entities.TicketQueryResult.datasource" />
@@ -132,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\globe_16.png" />
+    <None Include="Resources\vc-marker.png" />
     <Content Include="ticket12306demo.ico" />
   </ItemGroup>
   <ItemGroup />

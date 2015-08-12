@@ -51,7 +51,7 @@
 * [所有流程简介&项目结构整理](http://blog.fishlee.net/?p=2518)
 * [界面框架&基础数据初始化](http://blog.fishlee.net/?p=2560)
 * [查票并显示余票信息](http://blog.fishlee.net/?p=2574)
-* 验证码输入
+* [验证码输入](http://blog.fishlee.net/?p=2741)
 * 登录
 * 准备提交订单
 * 提交订单
