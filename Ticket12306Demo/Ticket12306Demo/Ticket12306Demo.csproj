@@ -68,6 +68,7 @@
     <Compile Include="Service\Entities\LoginInfo.cs" />
     <Compile Include="Service\Entities\Station.cs" />
     <Compile Include="Service\Entities\TicketQueryResult.cs" />
+    <Compile Include="Service\Entities\Web\LoginAsyncResult.cs" />
     <Compile Include="Service\Entities\Web\QueryTicketResultData.cs" />
     <Compile Include="Service\Entities\Web\QueryTicketResultDataInfo.cs" />
     <Compile Include="Service\Entities\Web\QueryTicketResultDataItem.cs" />
@@ -84,6 +85,12 @@
     <Compile Include="Service\VerifyCodeService.cs" />
     <Compile Include="UI\Dialogs\FormBase.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\MainForm.cs">
       <SubType>Form</SubType>
@@ -110,6 +117,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Dialogs\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

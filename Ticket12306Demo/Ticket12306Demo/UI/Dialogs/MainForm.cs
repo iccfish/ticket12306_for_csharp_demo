@@ -31,9 +31,6 @@ namespace Ticket12306Demo.UI.Dialogs
 			InitStatusBar();
 			InitQueryParamEdit();
 			InitTicketGrid();
-
-			var result = new RequireVcDlg(_context, VerifyCodeType.Login).ShowDialog();
-			MessageBox.Show(result.ToString());
 		}
 
 		#region 状态栏和工具栏事件
@@ -42,6 +39,8 @@ namespace Ticket12306Demo.UI.Dialogs
 		{
 			tsExit.Click += (s, e) => Close();
 			tsLogin.Enabled = !(tsLogout.Enabled = _context.Session.IsLogined);
+			tsLogin.Click += (s, e) => new Login(_context).ShowDialog(this);
+			tsLogout.Click += (s, e) => _context.Session.Logout();
 			//捕捉登录状态变化事件，在登录状态发生变化的时候重设登录状态
 			_context.Session.IsLoginedChanged += (s, e) =>
 			{
