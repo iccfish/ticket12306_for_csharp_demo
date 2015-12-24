@@ -21,10 +21,7 @@ namespace Ticket12306Demo.Network
 		/// </summary>
 		public NetClient()
 		{
-			Setting.JsonDeserializationSetting = new JsonDeserializationSetting()
-			{
-				Setting = new JsonSerializerSettings()
-			};
+			Setting.JsonDeserializationSetting = new JsonDeserializationSetting();
 			Setting.JsonDeserializationSetting.Setting.ContractResolver = new JsonContractResolver();
 		}
 	}
